@@ -89,16 +89,31 @@
 
   .neon-line{height:2px;border-radius:4px;background:linear-gradient(90deg,var(--accent1),var(--accent2));opacity:.85;margin:18px 0;box-shadow: 0 10px 40px rgba(0,255,231,0.06)}
 
-  /* ---------- CUBE ---------- */
+  /* ---------- CUBE (FIXED) ---------- */
   .cube-stage{width:100%;height:420px;display:grid;place-items:center;perspective:1200px}
-  .cube{width:220px;height:220px;position:relative;transform-style:preserve-3d;transform: rotateX(-15deg) rotateY(25deg);animation:cubeSpin 12s linear infinite}
-  .face{width:220px;height:220px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);display:grid;place-items:center;font-weight:700;font-family:'Orbitron';background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow: var(--card-glow)}
+  .cube{
+    width:220px;height:220px;position:relative;transform-style:preserve-3d;transform: rotateX(-15deg) rotateY(25deg);
+    animation:cubeSpin 12s linear infinite; will-change: transform;
+  }
+
+  /* IMPORTANT FIX: ensure the faces are absolutely positioned inside the cube
+     so translateZ(...) moves them in 3D instead of participating in normal layout */
+  .cube > * { position: absolute; inset: 0; display: block; }
+
+  .face{
+    width:220px;height:220px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);
+    display:grid;place-items:center;font-weight:700;font-family:'Orbitron';
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: var(--card-glow);
+    backface-visibility: hidden;
+  }
   .face--1{ transform: translateZ(110px); background: linear-gradient(135deg,var(--accent1),rgba(255,255,255,0.02)); color:#03030b }
   .face--2{ transform: rotateY(90deg) translateZ(110px); background:linear-gradient(135deg,var(--accent2),rgba(255,255,255,0.02)); color:#03030b }
   .face--3{ transform: rotateY(180deg) translateZ(110px) }
   .face--4{ transform: rotateY(-90deg) translateZ(110px) }
   .face--5{ transform: rotateX(90deg) translateZ(110px) }
   .face--6{ transform: rotateX(-90deg) translateZ(110px) }
+
   @keyframes cubeSpin{ 0%{transform:rotateX(-15deg) rotateY(0)}25%{transform:rotateX(-15deg) rotateY(90deg)}50%{transform:rotateX(-15deg) rotateY(180deg)}75%{transform:rotateX(-15deg) rotateY(270deg)}100%{transform:rotateX(-15deg) rotateY(360deg)} }
 
   /* ---------- PROJECTS GRID (glass cards + flip) ---------- */
