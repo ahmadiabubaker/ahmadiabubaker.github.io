@@ -1,119 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abubaker Ahmadi | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abubaker Ahmadi | Futuristic Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        /* BODY */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+/* BODY + BACKGROUND */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: radial-gradient(circle at 50% 50%, #0a0a0f, #15152b);
+    overflow-x: hidden;
+    color: #fff;
+    height: 100vh;
+}
 
-        /* CONTAINER */
-        .container {
-            text-align: center;
-            z-index: 1;
-            animation: fadeIn 2s ease-in-out;
-        }
+/* PARTICLES */
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg,#00ffe7,#ff00ff);
+    opacity: 0.2;
+    animation: float 20s linear infinite;
+}
+@keyframes float {
+    0% { transform: translate(0,0) scale(0.5);}
+    50% { transform: translate(50vw,50vh) scale(1);}
+    100% { transform: translate(-50vw,100vh) scale(0.5);}
+}
 
-        /* NAME */
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            background: linear-gradient(90deg, #00ffe7, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 2s infinite alternate;
-        }
+/* CONTAINER */
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 50px 20px;
+}
 
-        /* ROLE */
-        h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            font-size: 1.5rem;
-            color: #00ffe7;
-            margin: 10px 0 40px 0;
-            letter-spacing: 2px;
-        }
+/* NAME + TAGLINE */
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    background: linear-gradient(90deg,#00ffe7,#ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: neonGlow 2s infinite alternate;
+}
 
-        /* BUTTONS */
-        .btn {
-            text-decoration: none;
-            color: #fff;
-            border: 2px solid #00ffe7;
-            padding: 12px 30px;
-            margin: 0 10px;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #00ffe7;
+    margin: 10px 0 40px 0;
+    letter-spacing: 2px;
+    animation: flicker 3s infinite;
+}
 
-        .btn:hover {
-            background: #00ffe7;
-            color: #0b0c1a;
-            box-shadow: 0 0 15px #00ffe7, 0 0 30px #00ffe7, 0 0 45px #00ffe7;
-        }
+/* BUTTONS */
+.btn {
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid #00ffe7;
+    padding: 12px 30px;
+    margin: 0 10px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.btn:hover {
+    background: #00ffe7;
+    color: #0b0c1a;
+    box-shadow: 0 0 15px #00ffe7,0 0 30px #00ffe7,0 0 45px #ff00ff;
+}
 
-        /* ANIMATIONS */
-        @keyframes glow {
-            0% { text-shadow: 0 0 10px #00ffe7, 0 0 20px #00ffe7, 0 0 30px #ff00ff; }
-            100% { text-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffe7, 0 0 60px #ff00ff; }
-        }
+/* NEON GLOW */
+@keyframes neonGlow {
+    0% { text-shadow: 0 0 10px #00ffe7,0 0 20px #ff00ff; }
+    100% { text-shadow: 0 0 20px #ff00ff,0 0 40px #00ffe7; }
+}
+@keyframes flicker {
+    0%,19%,21%,23%,25%,54%,56%,100% { opacity:1; }
+    20%,22%,24%,55% { opacity:0.5; }
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* HOLOGRAPHIC CARDS */
+.cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    gap: 20px;
+}
 
-        /* BACKGROUND EFFECTS */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0,255,231,0.1) 0%, transparent 70%);
-            top: -50%;
-            left: -50%;
-            animation: rotate 60s linear infinite;
-        }
+.card {
+    background: rgba(0,255,231,0.05);
+    border: 1px solid #00ffe7;
+    padding: 30px;
+    width: 250px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0,255,231,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 0 40px #00ffe7, 0 0 60px #ff00ff;
+}
+.card h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffe7;
+    margin-bottom: 15px;
+}
+.card p { font-size: 0.9rem; line-height:1.4; color: #ccc; }
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+/* SCROLL HINT */
+.scroll-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffe7;
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0);}
+    50% { transform: translateX(-50%) translateY(-10px);}
+}
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 1.2rem; }
-        }
+/* RESPONSIVE */
+@media(max-width:768px){ h1{font-size:3rem;} h2{font-size:1.2rem;} .cards{flex-direction:column; align-items:center;} }
 
-    </style>
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Abubaker Ahmadi</h1>
-        <h2>Computer Science | AI & Software Development</h2>
-        <div>
-            <a href="#projects" class="btn">Projects</a>
-            <a href="#contact" class="btn">Contact</a>
+
+<!-- PARTICLES -->
+<div class="particle" style="width:10px; height:10px; top:20%; left:10%; animation-duration:25s;"></div>
+<div class="particle" style="width:15px; height:15px; top:40%; left:70%; animation-duration:30s;"></div>
+<div class="particle" style="width:8px; height:8px; top:60%; left:30%; animation-duration:20s;"></div>
+<div class="particle" style="width:12px; height:12px; top:80%; left:50%; animation-duration:35s;"></div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+    <h1>Abubaker Ahmadi</h1>
+    <h2>Computer Science | AI & Futuristic Tech</h2>
+    <div>
+        <a href="#projects" class="btn">Projects</a>
+        <a href="#contact" class="btn">Contact</a>
+    </div>
+
+    <!-- HOLOGRAPHIC CARDS -->
+    <div class="cards">
+        <div class="card">
+            <h3>AI & ML</h3>
+            <p>Building intelligent systems using machine learning, computer vision, and natural language processing.</p>
+        </div>
+        <div class="card">
+            <h3>Software Development</h3>
+            <p>Full-stack development, modern frameworks, and creating futuristic applications with sleek UI.</p>
+        </div>
+        <div class="card">
+            <h3>3D Simulations</h3>
+            <p>Interactive simulations and digital twins for immersive experiences in tech and research projects.</p>
         </div>
     </div>
+
+    <div class="scroll-hint">▼ Scroll down</div>
+</div>
+
 </body>
 </html>
