@@ -1,176 +1,453 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abubaker Ahmadi | Futuristic Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Abubaker Ahmadi — Futuristic Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-/* RESET */
-* { margin:0; padding:0; box-sizing:border-box; }
+  /* ---------- RESET ---------- */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  :root{
+    --bg-1:#03030b;
+    --bg-2:#0f1020;
+    --accent1: #00ffe7;
+    --accent2: #b700ff;
+    --muted: rgba(255,255,255,0.8);
+    --glass: rgba(255,255,255,0.03);
+    --glass-border: rgba(0,255,231,0.08);
+    --card-glow: 0 6px 30px rgba(0,255,231,0.06), inset 0 1px 0 rgba(255,255,255,0.02);
+  }
 
-/* BODY + BACKGROUND */
-body {
-    font-family: 'Roboto', sans-serif;
-    background: radial-gradient(circle at 50% 50%, #0a0a0f, #15152b);
-    overflow-x: hidden;
-    color: #fff;
-    height: 100vh;
-}
+  body{
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(0,255,231,0.03), transparent 8%),
+      radial-gradient(900px 400px at 90% 90%, rgba(183,0,255,0.03), transparent 8%),
+      linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+    color: white;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-y:auto;
+    scroll-behavior:smooth;
+  }
 
-/* PARTICLES */
-.particle {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(45deg,#00ffe7,#ff00ff);
-    opacity: 0.2;
-    animation: float 20s linear infinite;
-}
-@keyframes float {
-    0% { transform: translate(0,0) scale(0.5);}
-    50% { transform: translate(50vw,50vh) scale(1);}
-    100% { transform: translate(-50vw,100vh) scale(0.5);}
-}
+  /* subtle animated mesh overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(0,255,231,0.03), transparent 6%),
+      radial-gradient(circle at 80% 90%, rgba(183,0,255,0.03), transparent 6%);
+    mix-blend-mode:screen;
+    animation: meshShift 30s linear infinite;
+    opacity:0.9;
+  }
+  @keyframes meshShift{ from{transform:translateY(0)} to{transform:translateY(-20px)} }
 
-/* CONTAINER */
-.container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 50px 20px;
-}
+  /* ---------- LAYOUT ---------- */
+  .wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:40px 24px 120px}
 
-/* NAME + TAGLINE */
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 4rem;
-    background: linear-gradient(90deg,#00ffe7,#ff00ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: neonGlow 2s infinite alternate;
-}
+  header{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    position:sticky;top:18px;z-index:6;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
+    padding:12px 18px;border-radius:14px;
+    border:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  }
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--muted)}
+  .logo {
+    width:46px;height:46px;border-radius:10px;
+    background: linear-gradient(135deg,var(--accent1),var(--accent2));
+    display:grid;place-items:center;font-family: 'Orbitron';font-weight:900;
+    color: #03030b; font-size:14px; letter-spacing:0.6px;
+    box-shadow: 0 6px 30px rgba(183,0,255,0.12);
+  }
+  nav{display:flex;gap:12px;align-items:center}
+  nav a{
+    color:rgba(255,255,255,0.85);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;
+  }
+  nav a:hover{background:linear-gradient(90deg, rgba(0,255,231,0.06), rgba(183,0,255,0.04))}
 
-h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 500;
-    font-size: 1.5rem;
-    color: #00ffe7;
-    margin: 10px 0 40px 0;
-    letter-spacing: 2px;
-    animation: flicker 3s infinite;
-}
+  .cta{
+    display:inline-grid;place-items:center;padding:8px 14px;border-radius:999px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:linear-gradient(90deg, rgba(0,255,231,0.03), transparent);
+    color:var(--muted);font-weight:700;text-decoration:none;
+  }
 
-/* BUTTONS */
-.btn {
-    text-decoration: none;
-    color: #fff;
-    border: 2px solid #00ffe7;
-    padding: 12px 30px;
-    margin: 0 10px;
-    border-radius: 30px;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-.btn:hover {
-    background: #00ffe7;
-    color: #0b0c1a;
-    box-shadow: 0 0 15px #00ffe7,0 0 30px #00ffe7,0 0 45px #ff00ff;
-}
+  /* ---------- HERO ---------- */
+  .hero{
+    display:grid;grid-template-columns: 1fr 460px;gap:40px;align-items:center;padding:80px 0 40px;
+  }
+  .hero-left{z-index:3}
+  .eyebrow{color:rgba(255,255,255,0.55);font-weight:600;letter-spacing:1.2px;margin-bottom:16px}
+  .title{
+    font-family:'Orbitron',sans-serif;font-weight:700;font-size:44px;line-height:1.02;margin-bottom:12px;
+    background: linear-gradient(90deg,var(--accent1),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    text-shadow: 0 4px 26px rgba(0,0,0,0.6);
+  }
 
-/* NEON GLOW */
-@keyframes neonGlow {
-    0% { text-shadow: 0 0 10px #00ffe7,0 0 20px #ff00ff; }
-    100% { text-shadow: 0 0 20px #ff00ff,0 0 40px #00ffe7; }
-}
-@keyframes flicker {
-    0%,19%,21%,23%,25%,54%,56%,100% { opacity:1; }
-    20%,22%,24%,55% { opacity:0.5; }
-}
+  /* sliding roles (CSS only) */
+  .roles{
+    height:30px; overflow:hidden;margin-bottom:22px;
+    color:rgba(255,255,255,0.9);font-weight:600;font-size:18px;
+  }
+  .roles .stack{display:block;animation:slideRoles 8s steps(4, end) infinite}
+  .roles .stack span{display:block;height:30px}
+  @keyframes slideRoles{
+    0%{transform:translateY(0)}25%{transform:translateY(-30px)}50%{transform:translateY(-60px)}75%{transform:translateY(-90px)}100%{transform:translateY(0)}
+  }
 
-/* HOLOGRAPHIC CARDS */
-.cards {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 60px;
-    gap: 20px;
-}
+  .desc{color:rgba(255,255,255,0.65);max-width:60ch;margin-bottom:26px}
 
-.card {
-    background: rgba(0,255,231,0.05);
-    border: 1px solid #00ffe7;
-    padding: 30px;
-    width: 250px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(0,255,231,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 0 40px #00ffe7, 0 0 60px #ff00ff;
-}
-.card h3 {
-    font-family: 'Orbitron', sans-serif;
-    color: #00ffe7;
-    margin-bottom: 15px;
-}
-.card p { font-size: 0.9rem; line-height:1.4; color: #ccc; }
+  .hero-actions{display:flex;gap:12px;align-items:center}
+  .btn-ghost{
+    padding:12px 22px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);text-decoration:none;font-weight:700;
+    backdrop-filter: blur(6px); color:var(--muted)
+  }
+  .btn-primary{
+    padding:12px 22px;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));
+    color:#03030b;text-decoration:none;font-weight:800;box-shadow: 0 10px 30px rgba(0,255,231,0.12);
+  }
 
-/* SCROLL HINT */
-.scroll-hint {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Orbitron', sans-serif;
-    color: #00ffe7;
-    animation: bounce 2s infinite;
-}
-@keyframes bounce {
-    0%,100% { transform: translateX(-50%) translateY(0);}
-    50% { transform: translateX(-50%) translateY(-10px);}
-}
+  /* ---------- 3D CUBE ---------- */
+  .cube-stage{width:100%;height:420px;display:grid;place-items:center;perspective:1200px}
+  .cube{
+    width:220px;height:220px;position:relative;transform-style:preserve-3d;
+    transform: rotateX(-15deg) rotateY(25deg);
+    animation: cubeSpin 12s linear infinite;
+  }
+  .cube *{position:absolute;inset:auto;display:block}
+  .face{
+    width:220px;height:220px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);
+    display:grid;place-items:center;font-weight:700;font-family:'Orbitron';
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow: var(--card-glow);
+  }
+  .face--1{ transform: translateZ(110px); background: linear-gradient(135deg,var(--accent1),rgba(255,255,255,0.02)); color:#03030b }
+  .face--2{ transform: rotateY(90deg) translateZ(110px); background:linear-gradient(135deg,var(--accent2),rgba(255,255,255,0.02)); color:#03030b }
+  .face--3{ transform: rotateY(180deg) translateZ(110px) }
+  .face--4{ transform: rotateY(-90deg) translateZ(110px) }
+  .face--5{ transform: rotateX(90deg) translateZ(110px) }
+  .face--6{ transform: rotateX(-90deg) translateZ(110px) }
 
-/* RESPONSIVE */
-@media(max-width:768px){ h1{font-size:3rem;} h2{font-size:1.2rem;} .cards{flex-direction:column; align-items:center;} }
+  .face svg{width:70%;height:70%;opacity:0.95}
+  @keyframes cubeSpin{
+    0%{transform: rotateX(-15deg) rotateY(0deg)}
+    25%{transform: rotateX(-15deg) rotateY(90deg)}
+    50%{transform: rotateX(-15deg) rotateY(180deg)}
+    75%{transform: rotateX(-15deg) rotateY(270deg)}
+    100%{transform: rotateX(-15deg) rotateY(360deg)}
+  }
 
+  /* ---------- PROJECTS GRID (glass cards + flip) ---------- */
+  section.projects{margin-top:60px}
+  .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}
+  .card{
+    perspective:1200px;border-radius:14px;
+  }
+  .card-inner{
+    position:relative;border-radius:12px;overflow:hidden;
+    transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.9,.3,1);
+    min-height:220px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid var(--glass-border);backdrop-filter: blur(8px);
+  }
+  .card:hover .card-inner{transform: translateY(-10px) rotateX(6deg)}
+  .card-media{height:120px;background:linear-gradient(90deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));display:grid;place-items:center}
+  .card-title{padding:14px 16px;font-weight:700}
+  .card-tags{padding:0 16px 18px;color:rgba(255,255,255,0.6);font-size:13px}
+
+  /* flip to show details (pure CSS) */
+  .card .flip{
+    transform-origin:center;transition:transform .6s;transform-style:preserve-3d;
+  }
+  .card:hover .flip{transform: rotateY(180deg)}
+  .front, .back{
+    position:absolute;inset:0;backface-visibility:hidden;padding:16px;
+  }
+  .front{z-index:2}
+  .back{
+    transform: rotateY(180deg); background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    color:rgba(255,255,255,0.95);display:flex;flex-direction:column;justify-content:center;gap:10px;
+  }
+  .link-inline{display:inline-block;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-decoration:none;font-weight:700}
+
+  /* ---------- SKILLS RADAR (SVG) ---------- */
+  .skills-section{display:grid;grid-template-columns:1fr 360px;gap:28px;margin-top:60px;align-items:center}
+  .skills-list{display:flex;flex-direction:column;gap:12px}
+  .skill-row{display:flex;justify-content:space-between;align-items:center}
+  .skill-name{color:rgba(255,255,255,0.85);font-weight:700}
+  .skill-meter{width:48%;height:8px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));overflow:hidden}
+  .skill-meter > i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));transform-origin:left;transition:width 1s ease}
+
+  /* ---------- CONTACT (modal via checkbox) ---------- */
+  /* hidden checkbox control */
+  #contact-toggle{display:none}
+  .contact-btn{cursor:pointer}
+  .modal{
+    position:fixed;inset:0;display:grid;place-items:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6));z-index:10;opacity:0;pointer-events:none;transition:opacity .25s;
+  }
+  #contact-toggle:checked + .modal{opacity:1;pointer-events:all}
+  .modal-card{
+    width:min(720px,94%);padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid var(--glass-border);backdrop-filter: blur(10px);
+  }
+  .modal-card h3{font-family:'Orbitron';font-weight:700;margin-bottom:8px;color:var(--accent1)}
+  .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .field{padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.01);color:var(--muted)}
+  .close-label{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.03);cursor:pointer;font-weight:700}
+
+  /* ---------- FOOTER ---------- */
+  footer{margin-top:80px;color:rgba(255,255,255,0.45);font-size:13px;text-align:center;padding:36px 0}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1020px){
+    .hero{grid-template-columns: 1fr 360px}
+    .projects-grid{grid-template-columns:repeat(2,1fr)}
+    .skills-section{grid-template-columns:1fr}
+    .cube-stage{height:320px}
+  }
+  @media (max-width:680px){
+    header{flex-direction:column;gap:12px}
+    .hero{grid-template-columns:1fr;gap:18px;padding-top:36px}
+    .title{font-size:32px}
+    .cube-stage{display:none} /* hide cube on tiny screens */
+    .projects-grid{grid-template-columns:1fr}
+  }
+
+  /* small decorative glows */
+  .neon-line{
+    height:2px;border-radius:4px;background:linear-gradient(90deg,var(--accent1),var(--accent2));opacity:.85;margin:18px 0;
+    box-shadow: 0 10px 40px rgba(0,255,231,0.06);
+  }
+
+  /* accessibility focus */
+  a:focus, button:focus, label:focus {outline:2px solid rgba(255,255,255,0.06);outline-offset:2px}
 </style>
 </head>
 <body>
 
-<!-- PARTICLES -->
-<div class="particle" style="width:10px; height:10px; top:20%; left:10%; animation-duration:25s;"></div>
-<div class="particle" style="width:15px; height:15px; top:40%; left:70%; animation-duration:30s;"></div>
-<div class="particle" style="width:8px; height:8px; top:60%; left:30%; animation-duration:20s;"></div>
-<div class="particle" style="width:12px; height:12px; top:80%; left:50%; animation-duration:35s;"></div>
+<div class="wrap">
 
-<!-- MAIN CONTAINER -->
-<div class="container">
-    <h1>Abubaker Ahmadi</h1>
-    <h2>Computer Science | AI & Futuristic Tech</h2>
+  <!-- HEADER -->
+  <header aria-label="Top navigation">
+    <a class="brand" href="#">
+      <div class="logo" aria-hidden="true">AA</div>
+      <div>
+        <div style="font-weight:800">Abubaker Ahmadi</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6)">CS • AI • Simulations</div>
+      </div>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a class="cta contact-btn" role="button" for="contact-toggle" onclick="location.hash='#contact'">Contact</a>
+      <!-- The above anchor is just visual; real modal opens via checkbox below -->
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main class="hero" id="home" role="main">
+    <div class="hero-left">
+      <div class="eyebrow">CREATIVE TECHNOLOGIST & COMPUTER SCIENTIST</div>
+      <h1 class="title">Abubaker Ahmadi</h1>
+
+      <div class="roles" aria-hidden="true">
+        <div class="stack">
+          <span>AI Engineer • Computer Vision</span>
+          <span>Digital Twin & 3D Simulation</span>
+          <span>Full-stack Software</span>
+          <span>Research & Systems Design</span>
+        </div>
+      </div>
+
+      <p class="desc">I design and build AI-driven systems, digital twins, and polished software with a focus on high-impact research and production-ready engineering. My work blends simulation, computer vision, and elegant UX.</p>
+
+      <div class="hero-actions">
+        <a class="btn-primary" href="#projects">Explore Projects</a>
+        <a class="btn-ghost" href="#about">About</a>
+        <label for="contact-toggle" class="btn-ghost contact-btn">Contact</label>
+      </div>
+
+      <div class="neon-line" aria-hidden="true"></div>
+
+      <!-- small feature highlights -->
+      <div style="display:flex;gap:12px;margin-top:18px;flex-wrap:wrap">
+        <div style="padding:10px 14px;border-radius:12px;background:linear-gradient(90deg, rgba(0,255,231,0.02), rgba(183,0,255,0.02));border:1px solid rgba(255,255,255,0.03)">
+          <div style="font-weight:800">Princeton Lab Collab</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.6)">Digital twin for chip packaging</div>
+        </div>
+        <div style="padding:10px 14px;border-radius:12px;background:linear-gradient(90deg, rgba(0,255,231,0.02), rgba(183,0,255,0.02));border:1px solid rgba(255,255,255,0.03)">
+          <div style="font-weight:800">Open Source</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.6)">CV tools & automation scripts</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D cube stage -->
+    <div class="cube-stage" aria-hidden="true">
+      <div class="cube" role="img" aria-label="Rotating 3D cube">
+        <div class="face face--1"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="3" stroke="rgba(0,0,0,0.15)"/><path d="M6 12h12" stroke="#03030b" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="face face--2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="6" fill="rgba(0,0,0,0.08)"/></svg></div>
+        <div class="face face--3"><div style="font-size:18px;color:rgba(255,255,255,0.85)">AI</div></div>
+        <div class="face face--4"><div style="font-size:18px;color:rgba(255,255,255,0.85)">CV</div></div>
+        <div class="face face--5"><div style="font-size:16px;color:rgba(255,255,255,0.85)">SIM</div></div>
+        <div class="face face--6"><div style="font-size:16px;color:rgba(255,255,255,0.85)">UI</div></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title" style="font-family: 'Orbitron';font-weight:800;font-size:20px">Selected Projects</h2>
+    <p style="color:rgba(255,255,255,0.6);margin-top:8px">Interactive demos, computer vision systems, and digital twin simulations.</p>
+
+    <div class="projects-grid" role="list">
+      <!-- card 1 -->
+      <article class="card" role="listitem" aria-label="Project: Chip packaging digital twin">
+        <div class="card-inner flip">
+          <div class="front">
+            <div class="card-media">
+              <!-- placeholder svg "thumbnail" -->
+              <svg viewBox="0 0 200 120" width="100%" height="100%"><rect width="200" height="120" rx="10" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0%" x2="100%"><stop offset="0" stop-color="#00ffe7"/><stop offset="1" stop-color="#b700ff"/></linearGradient></defs></svg>
+            </div>
+            <div class="card-title">Digital Twin: Chip Packaging</div>
+            <div class="card-tags">Simulations • Python • CV</div>
+          </div>
+          <div class="back">
+            <div style="font-weight:800">Digital Twin for chip lab</div>
+            <div style="color:rgba(255,255,255,0.75)">Realtime asset visualization, simulation-driven inspection pipelines and telemetry dashboards for lab automation.</div>
+            <div style="margin-top:8px">
+              <a class="link-inline" href="#">View Repo</a>
+              <a class="link-inline" style="margin-left:8px" href="#">Demo</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- card 2 -->
+      <article class="card" role="listitem" aria-label="Project: CV defect detection">
+        <div class="card-inner flip">
+          <div class="front">
+            <div class="card-media">
+              <svg viewBox="0 0 200 120" width="100%" height="100%"><rect width="200" height="120" rx="10" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0%" x2="100%"><stop offset="0" stop-color="#b700ff"/><stop offset="1" stop-color="#00ffe7"/></linearGradient></defs></svg>
+            </div>
+            <div class="card-title">Automated Defect Detection</div>
+            <div class="card-tags">ImageJ • OpenCV • ModelOps</div>
+          </div>
+          <div class="back">
+            <div style="font-weight:800">High-resolution inspection</div>
+            <div style="color:rgba(255,255,255,0.75)">A CV pipeline that flags bonding defects and auto-generates annotated reports for QA workflows.</div>
+            <div style="margin-top:8px">
+              <a class="link-inline" href="#">Paper</a>
+              <a class="link-inline" style="margin-left:8px" href="#">Code</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- card 3 -->
+      <article class="card" role="listitem" aria-label="Project: AI document organizer">
+        <div class="card-inner flip">
+          <div class="front">
+            <div class="card-media">
+              <svg viewBox="0 0 200 120" width="100%" height="100%"><rect width="200" height="120" rx="10" fill="#111216"/></svg>
+            </div>
+            <div class="card-title">AI Document Organizer</div>
+            <div class="card-tags">GDrive • NLP • Automation</div>
+          </div>
+          <div class="back">
+            <div style="font-weight:800">Auto organize & rename</div>
+            <div style="color:rgba(255,255,255,0.75)">Scans shared drives, extracts metadata with NLP, renames and files reports using a rules engine.</div>
+            <div style="margin-top:8px">
+              <a class="link-inline" href="#">Writeup</a>
+              <a class="link-inline" style="margin-left:8px" href="#">Script</a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills-section" aria-labelledby="skills-title">
     <div>
-        <a href="#projects" class="btn">Projects</a>
-        <a href="#contact" class="btn">Contact</a>
+      <h2 id="skills-title" style="font-family: 'Orbitron';font-weight:800;font-size:20px">Skills & Tools</h2>
+      <p style="color:rgba(255,255,255,0.6);margin-top:8px">Core competencies and tools I use frequently.</p>
+      <div class="skills-list" style="margin-top:18px">
+        <div class="skill-row"><div class="skill-name">Python</div><div class="skill-meter"><i style="width:92%"></i></div></div>
+        <div class="skill-row"><div class="skill-name">Computer Vision</div><div class="skill-meter"><i style="width:88%"></i></div></div>
+        <div class="skill-row"><div class="skill-name">Simulation / 3D</div><div class="skill-meter"><i style="width:78%"></i></div></div>
+        <div class="skill-row"><div class="skill-name">Full-stack</div><div class="skill-meter"><i style="width:72%"></i></div></div>
+        <div class="skill-row"><div class="skill-name">ML / NLP</div><div class="skill-meter"><i style="width:82%"></i></div></div>
+      </div>
     </div>
 
-    <!-- HOLOGRAPHIC CARDS -->
-    <div class="cards">
-        <div class="card">
-            <h3>AI & ML</h3>
-            <p>Building intelligent systems using machine learning, computer vision, and natural language processing.</p>
-        </div>
-        <div class="card">
-            <h3>Software Development</h3>
-            <p>Full-stack development, modern frameworks, and creating futuristic applications with sleek UI.</p>
-        </div>
-        <div class="card">
-            <h3>3D Simulations</h3>
-            <p>Interactive simulations and digital twins for immersive experiences in tech and research projects.</p>
-        </div>
-    </div>
+    <!-- animated SVG radar (simple) -->
+    <div style="display:grid;place-items:center">
+      <svg viewBox="0 0 220 220" width="320" height="320" aria-hidden="true">
+        <defs>
+          <linearGradient id="radGrad" x1="0" x2="1"><stop offset="0" stop-color="#00ffe7"/><stop offset="1" stop-color="#b700ff"/></linearGradient>
+        </defs>
+        <!-- concentric rings -->
+        <g fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1">
+          <circle cx="110" cy="110" r="80"></circle>
+          <circle cx="110" cy="110" r="55"></circle>
+          <circle cx="110" cy="110" r="30"></circle>
+        </g>
 
-    <div class="scroll-hint">▼ Scroll down</div>
+        <!-- animated polygon (example "radar" shape) -->
+        <polygon id="radarPoly" points="110,30 180,80 150,170 80,170 50,85" fill="url(#radGrad)" opacity="0.12" transform-origin="110 110">
+          <animateTransform attributeName="transform" type="rotate" from="0 110 110" to="360 110 110" dur="18s" repeatCount="indefinite" />
+        </polygon>
+
+        <!-- pulse center -->
+        <circle cx="110" cy="110" r="6" fill="#00ffe7" opacity="0.95">
+          <animate attributeName="r" values="6;14;6" dur="2.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.95;0.18;0.95" dur="2.6s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" style="margin-top:60px">
+    <h2 style="font-family: 'Orbitron';font-weight:800;font-size:20px">About</h2>
+    <p style="color:rgba(255,255,255,0.6);margin-top:10px;max-width:60ch">
+      I’m a CS student and full-stack engineer building AI tools, CV pipelines, and realistic simulations. I collaborate with labs to bring digital twins into workflows and open-source tools for reproducible research. I love designing elegant systems that scale from prototype to production.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    Built with HTML & CSS — © <strong>Abubaker Ahmadi</strong> — <span style="opacity:.8">2025</span>
+  </footer>
+</div>
+
+<!-- CONTACT MODAL (checkbox hack) -->
+<input type="checkbox" id="contact-toggle" />
+<div class="modal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+    <h3 id="contact-title">Get in touch</h3>
+    <p style="color:rgba(255,255,255,0.7)">Prefer email? <strong style="color:var(--accent1)">aahmadi@mercercouncil.org</strong></p>
+    <div class="modal-grid" style="margin-top:12px">
+      <input class="field" placeholder="Your name" aria-label="Your name" />
+      <input class="field" placeholder="Email" aria-label="Your email" />
+      <input class="field" placeholder="Subject" style="grid-column:1 / -1" aria-label="Subject" />
+      <textarea class="field" placeholder="Message" style="grid-column:1 / -1;height:120px" aria-label="Message"></textarea>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+      <label for="contact-toggle" class="close-label">Close</label>
+      <button class="close-label" style="background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:#03030b">Pretend send</button>
+    </div>
+  </div>
 </div>
 
 </body>
